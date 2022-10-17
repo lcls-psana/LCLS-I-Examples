@@ -1,13 +1,15 @@
-from mpi4py import MPI
-comm = MPI.COMM_WORLD
-rank = comm.Get_rank()
-size = comm.Get_size()
 
+from mpi4py import MPI
+from mpidata import mpidata
 from psmon import publish
 import psmon.plots as psplt
 import h5py
 import numpy as np
-from mpidata import mpidata 
+
+
+comm = MPI.COMM_WORLD
+rank = comm.Get_rank()
+size = comm.Get_size()
 
 def runmaster(nClients):
     while nClients > 0:
@@ -20,4 +22,4 @@ def runmaster(nClients):
             plot(md)
 
 def plot(md):
-    print 'Master received image with shape',md.img.shape,'and intensity',md.small.intensity
+    print(f'Master received image with shape {md.img.shape} and intensity {md.small.intensity}')
